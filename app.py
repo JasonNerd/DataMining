@@ -17,19 +17,22 @@ movies = [
 ]
 # Just for demo use ###
 
+@app.route('/test')
+def test():
+    # following is a demostration about how to pass argvs
+    return render_template('testdemo.html', name=name, movies=movies)
+
+
 @app.route('/')
 @app.route('/index')
 @app.route('/home')
 def index():
-    # following is a demostration about how to pass argvs
-    return render_template('testdemo.html', name=name, movies=movies)
+    return render_template('index.html')
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html', name=name, movies=movies)
-
+    return render_template('upload.html', result_path="/result")
 
 @app.route('/result')
 def result():
-    return render_template('result.html', name=name, movies=movies)
-
+    return render_template('result.html')

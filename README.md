@@ -1,10 +1,15 @@
 # DataMining
 DB project
 # note, to run this app:
-```bat
+```
 pip install -r requirements.txt
+
+npm ci
+
 $env:FLASK_APP = "app.py"
 flask run
 ```
-# refer website
+
+# framework documentation
 * https://read.helloflask.com/template/
+* https://tailwindcss.com/docs
