@@ -26,12 +26,13 @@ test 中包含一个可运行的 jupyter notebook 决策树示例文件
 主要是 graphviz 以及 pandas 库
 
 问题说明:
-calc_tree_from_file(file, ["Play", "Not Play"])
+
+1. calc_tree_from_file(file, ["Play", "Not Play"])
 还需要用户填入的 target 字段作为参数传入，这一点并未体现
 以课上的天气为例，需要 "Play" "Not Play"
-另外就是网页显示png图片的问题，这里结果已经保存为图片了
+另外就是网页显示png图片的问题，这里结果已经保存为图片了 @ wu ao li
 
-此外，dot 文件应该支持一层一层的显示，网页是否支持直接显示 dot 文件
+2. 此外，dot 文件应该支持一层一层的显示，网页是否支持直接显示 dot 文件 @chen tian chun
 
 注意事项：
 为了debug方便，app 添加了最后的main语句, 因此运行时可以直接run这个py文件(常规运行python程序的方法)
