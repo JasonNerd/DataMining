@@ -20,7 +20,7 @@ def calc_tree_from_file(file, target_name):
     file_store_path = UPLOAD_FOLDER + file.filename
     file.save(file_store_path)
     # 2. read the csv and transfer string category to number category
-    df = pd.read_csv(file_store_path)
+    df = pd.read_csv(file_store_path, index_col=0)
     le = LabelEncoder()
     df_num = pd.DataFrame()
     for col in df.columns:
@@ -47,7 +47,7 @@ def calc_tree_from_file(file, target_name):
     # transfer to .png file
     from os import popen
     popen("dot -Tpng "+res_fl_path+".dot -o "+res_fl_path+".png")
-    return graph
+    return res_fl_path+".png"
 
 # Just for demo use ###
 name = 'Grey Li'
