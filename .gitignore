@@ -1,6 +1,10 @@
 #ignore npm dep files
 node_modules
 
+# test directory
+test/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
+from sklearn.model_selection import train_test_split
 from werkzeug.utils import secure_filename
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -27,19 +28,20 @@ def calc_tree_from_file(file, target_name):
         label = le.fit_transform(df[col])
         df_num[col] = label
     # 3. split df to X and y, transfer to numpy array
-    X = df_num[df_num.columns[:-1]].values
-    y = df_num[df_num.columns[-1]].values
+    y = df_num[target_name].values
+    X_col = df_num.columns.to_list()
+    X_col.remove(target_name)
+    X = df_num[X_col].values
+    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, y, test_size=0.3)
     # 4. train a decision tree
-    clf = tree.DecisionTreeClassifier(criterion="entropy")# 实例化模型，添加criterion参数
-    clf = clf.fit(X, y)
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(Xtrain, Ytrain)  # 使用实例化好的模型进行拟合操作
+    score = clf.score(Xtest,Ytest) #返回预测的准确度
     # 5. plot the tree
-    dot_data = tree.export_graphviz(clf #训练好的模型
-                                ,out_file = None
-                                ,feature_names= df_num.columns[:-1]
-                                ,class_names=target_name
-                                ,filled=True  #进行颜色填充
-                                ,rounded=True #树节点的形状控制
-    )
+    class_name = []
+    for i in df[target_name].unique():
+        class_name.append(target_name+' of '+i)
+    dot_data = tree.export_graphviz(clf, feature_names= X_col, class_names=class_name)
     graph = graphviz.Source(dot_data)
     # save to .dot
     res_fl_path = RESULT_FOLDER+file.filename
@@ -47,28 +49,11 @@ def calc_tree_from_file(file, target_name):
     # transfer to .png file
     from os import popen
     popen("dot -Tpng "+res_fl_path+".dot -o "+res_fl_path+".png")
+    #### NOTE: here `res_fl_path+".png"` represent the result decision tree png file name
+    #### TODO: and it can be post on the result html page
+    #### NOTE: `score` represent the accuracy of decision
+    print(score) # can be posted on the result page
     return res_fl_path+".png"
-
-# Just for demo use ###
-name = 'Grey Li'
-movies = [
-    {'title': 'My Neighbor Totoro', 'year': '1988'},
-    {'title': 'Dead Poets Society', 'year': '1989'},
-    {'title': 'A Perfect World', 'year': '1993'},
-    {'title': 'Leon', 'year': '1994'},
-    {'title': 'Mahjong', 'year': '1996'},
-    {'title': 'Swallowtail Butterfly', 'year': '1996'},
-    {'title': 'King of Comedy', 'year': '1999'},
-    {'title': 'Devils on the Doorstep', 'year': '1999'},
-    {'title': 'WALL-E', 'year': '2008'},
-    {'title': 'The Pork of Music', 'year': '2012'},
-]
-# Just for demo use ###
-
-@app.route('/test')
-def test():
-    # following is a demostration about how to pass argvs
-    return render_template('testdemo.html', name=name, movies=movies)
 
 
 @app.route('/')
@@ -95,7 +80,8 @@ def calc_result():
             flash('No selected file')
             return redirect('/start')
         if file and allowed_file(file.filename):
-            return render_template('result.html', tree=calc_tree_from_file(file, ["Play", "Not Play"]))
+            print(request.form)
+            return render_template('result.html', tree=calc_tree_from_file(file, target_name="Play"))
     
     return redirect('/start')
 
