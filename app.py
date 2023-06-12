@@ -94,7 +94,8 @@ def calc_result():
         if file.filename == '':
             flash('No selected file')
             return redirect('/start')
-        if file and allowed_file(file.filename):
+        if not (file and allowed_file(file.filename)):
+            print(request.form['class_column_name'])
             return render_template('result.html', tree=calc_tree_from_file(file, ["Play", "Not Play"]))
     
     return redirect('/start')
