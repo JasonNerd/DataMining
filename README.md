@@ -15,7 +15,7 @@ flask run
 * https://tailwindcss.com/docs
 
 ## update log
-对于 filestorage 文件夹
+对于 static 文件夹
 upload 存放的是用户上传的 csv 文件
 result 存放的是决策树文件
 test 中包含一个可运行的 jupyter notebook 决策树示例文件
