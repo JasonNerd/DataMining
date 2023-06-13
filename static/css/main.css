@@ -870,6 +870,14 @@ select {
   overflow-y: scroll;
 }
 
+.overscroll-y-contain {
+  overscroll-behavior-y: contain;
+}
+
+.overscroll-y-none {
+  overscroll-behavior-y: none;
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }

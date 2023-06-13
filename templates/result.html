@@ -12,11 +12,16 @@
               </div>
               <div class="flex flex-col border border-gray-400 rounded-2xl p-8">
                 <h1 class="text-lg text-center text-white">Explanation</h1>
-                <p class="text-white font-mono">{{ tree }}</p>
+                <p class="text-white mt-4">This tree is estimated to be able to predict '{{ class_name }}' with {{ accuracy }}% accuracy</p>
+                <div id="explanation" class="mt-4">
+                    {% for line in tree_explanation %}
+                        <p class="text-white font-mono">{{ line }}</p>
+                    {% endfor %}
+                </div>
               </div>
               <div class="flex flex-col md:col-span-2 border border-gray-400 rounded-2xl p-8">
                 <h1 class="text-lg text-center text-white">Tree</h1>
-                <p class="text-white font-mono">{{ tree }}</p>
+                <img src="{{ url_for('static', filename=tree_png_filename) }}" class=""/>
               </div>
             </div>
         </div>
