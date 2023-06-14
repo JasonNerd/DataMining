@@ -6,22 +6,20 @@
 {% block content %}
     <div class="flex w-full h-full justify-center items-center py-2 md:py-8">
         <div class="xl:rounded-2xl bg-brandgreen-800 bg-opacity-90 p-8 max-w-screen-xl w-full">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div class="flex flex-col md:col-span-3">
-                <h1 class="text-2xl text-center text-white">Results</h1>
-              </div>
-              <div class="flex flex-col border border-gray-400 rounded-2xl p-8">
-                <h1 class="text-lg text-center text-white">Explanation</h1>
-                <p class="text-white mt-4">This tree is estimated to be able to predict '{{ class_name }}' with {{ accuracy }}% accuracy</p>
-                <div id="explanation" class="mt-4">
-                    {% for line in tree_explanation %}
-                        <p class="text-white font-mono">{{ line }}</p>
-                    {% endfor %}
-                </div>
-              </div>
-              <div class="flex flex-col md:col-span-2 border border-gray-400 rounded-2xl p-8">
-                <h1 class="text-lg text-center text-white">Tree</h1>
-                <img src="{{ url_for('static', filename=tree_png_filename) }}" class=""/>
+            <div class="flex flex-col mb-8">
+              <h1 class="text-2xl text-center text-white">Results</h1>
+            </div>
+            <div class="flex flex-col aspect-video border border-gray-400 rounded-2xl mb-8 p-8">
+              <h1 class="text-lg text-center text-white mb-4">Tree</h1>
+              <iframe frameborder='0' noresize='noresize' class='relative bg-brandgreen-100 w-full h-full' src="{{ url_for('static', filename=sankey_html_filename) }}" frameborder="0"></iframe>
+            </div>
+            <div class="flex flex-col border border-gray-400 rounded-2xl p-8">
+              <h1 class="text-lg text-center text-white mb-4">Explanation</h1>
+              <p class="text-white">This tree is estimated to be able to predict '{{ class_name }}' with {{ accuracy }}% accuracy</p>
+              <div id="explanation" class="mt-4">
+                  {% for line in tree_explanation %}
+                      <p class="text-white font-mono">{{ line }}</p>
+                  {% endfor %}
               </div>
             </div>
         </div>

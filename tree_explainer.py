@@ -9,7 +9,7 @@ def int_to_ordinal(int):
     return str(int) + suffix
   
 def get_column_name(clf, index):
-    if 'feature_names_in_' in clf:
+    if hasattr(clf, 'feature_names_in_'):
         return clf.feature_names_in_[index]
     else:
         return int_to_ordinal(index + 1)
@@ -45,18 +45,18 @@ def explain_tree(clf):
     for i in range(n_nodes):
         out_node = ""
         if is_leaves[i]:
-            out_node = "{space}node={node} is a leaf node. {accuracy}% of samples at this point are ".format(
+            out_node = "{space}node={node} is a leaf node. All but {accuracy}% of samples at this point are impure.".format(
                 space=node_depth[i] * "\t", node=i, accuracy=(round(impurity[i] * 100, 2))
             )
         else:
             out_node = """{space}node={node} is a split node:
-            go to node {left} if X[:, {feature}] <= {threshold}
+            go to node {left} if {feature} <= {threshold}
             else to node {right}.""".format(
                 space=node_depth[i] * "\t",
                 node=i,
                 left=children_left[i],
-                feature=feature[i],
-                threshold=threshold[i],
+                feature=get_column_name(clf, feature[i]) + " column",
+                threshold=round(threshold[i], 2),
                 right=children_right[i],
             )
             
