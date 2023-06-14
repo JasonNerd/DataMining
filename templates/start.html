@@ -5,12 +5,12 @@
 {% endblock %}
 {% block content %}
     <div class="flex w-full h-full justify-center items-center py-8">
-        <div class="rounded-2xl bg-gray-700 bg-opacity-90 p-8 max-w-lg">
-            <h1 class="text-white text-xl text-center">Give the Tree Whisperer some data</h1>
+        <div class="rounded-2xl bg-brandgreen-800 bg-opacity-90 p-8 max-w-lg">
+            <h1 class="text-white text-xl text-center">Give the BrainBranch some data</h1>
             {% with messages = get_flashed_messages() %}
               {% if messages %}
                 {% for message in messages %}
-                  <div class="flex p-4 mt-4 rounded-lg bg-gray-800 text-red-400" role="alert">
+                  <div class="flex p-4 mt-4 rounded-lg bg-brandgreen-900 text-red-400" role="alert">
                     <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
                     <span class="sr-only">Info</span>
                     <div class="ml-3 text-sm font-medium">
@@ -23,15 +23,15 @@
             <form class="flex flex-col" action="/result" method="post" enctype="multipart/form-data">
                 <div id="file_upload_div" class="mt-8">
                     <label class="block mb-2 text-sm font-medium text-white" for="file_input">Upload CSV file</label>
-                    <input class="block w-full text-sm  border  rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400" id="file_input" name="file_input" type="file" accept=".csv" required>
-                    <a href="{{ url_for('static', filename='sample.csv') }}" class="text-sm underline text-gray-400 mt-2">CSV format example</a>
+                    <input class="block w-full text-sm border rounded-lg cursor-pointer text-brandgreen-400 focus:outline-none bg-brandgreen-800 border-brandgreen-600 placeholder-brandgreen-400" id="file_input" name="file_input" type="file" accept=".csv" required>
+                    <a href="{{ url_for('static', filename='sample.csv') }}" class="text-sm underline text-brandgreen-400 mt-2">CSV format example</a>
                 </div>
                 <div id="class_column_name_div" class="mt-8">
                   <label for="class_column_name" class="block mb-2 text-sm font-medium text-white">Name/index of column to predict</label>
-                  <input type="text" id="class_column_name" name="class_column_name" class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="e.g. result, 9" required>  
-                  <p id="helper-text-explanation" class="mt-2 text-sm text-gray-400">This will be the column you are trying to predict, all other columns will be used to predict this column.</p>
+                  <input type="text" id="class_column_name" name="class_column_name" class="border text-sm rounded-lg block w-full p-2.5 bg-brandgreen-800 border-brandgreen-600 placeholder-brandgreen-400 text-white focus:ring-brandgreen-500 focus:border-brandgreen-500" placeholder="e.g. result, 9" required>  
+                  <p id="helper-text-explanation" class="mt-2 text-sm text-brandgreen-400">This will be the column you are trying to predict, all other columns will be used to predict this column.</p>
                 </div>
-                <button type="submit" class="self-center mt-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit</button>
+                <button type="submit" class="self-center mt-8 text-brandgreen-700 bg-brandgreen-200 hover:bg-brandgreen-300 focus:ring-4 focus:outline-none focus:ring-brandgreen-300 font-medium rounded-lg text-sm px-5 py-2.5">Submit</button>
             </form>
         </div>
     </div>
