@@ -982,6 +982,11 @@ select {
   background-color: rgb(8 22 18 / var(--tw-bg-opacity));
 }
 
+.bg-brandgreen-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(97 198 167 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
 }
