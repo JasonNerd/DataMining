@@ -4,8 +4,26 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
-    <h1>Index</h1>
-    <p class="important">
-        Welcome to my awesome homepage.
-    </p>
+    <div class="flex w-full h-full justify-center items-center py-2 md:py-8">
+        <div class="xl:rounded-2xl bg-brandgreen-800 bg-opacity-90 p-8 max-w-screen-md w-full">
+            <div class="flex flex-col mb-12">
+                <h1 class="text-2xl text-center text-white">What is BranchBrain?</h1>
+                <p class="text-brandgreen-100 mt-4">Neural networks can be powerful predictors, but are incomprehensible to humans. We use decision trees to represent patterns in your data and give you a clear idea of how those predictions are made. We aim to help you see how you can make these predictions in your head.</p>
+            </div>
+            <div class="flex flex-col mb-12">
+                <h1 class="text-2xl text-center text-white">White-box nature of Decision Trees</h1>
+                <p class="text-brandgreen-100 mt-4">One of the main advantages of decision trees is that they have what is known as "white-box" properties, meaning that the reasoning behind their predictions can be easily understood and traced back to specific features and decision points in the tree. This makes it possible to verify the accuracy of the model, identify potential biases or errors, and make informed decisions based on the predictions. This is particularly important in fields such as medicine and finance where transparency and accountability are crucial.</p>
+                <p class="text-brandgreen-100 mt-4">This demo will show you how the CART algorithm, which is a popular decision tree algorithm, works using a simple example.</p>
+            </div>
+            <div class="flex flex-col mb-12">
+                <h1 class="text-2xl text-center text-white">How to use?</h1>
+                <p class="text-brandgreen-100 mt-4">To use BranchBrain, simply upload a file with your data and select the features you want to include in the decision tree. You will then be able to visualize the decision process in detail and use it to guide your decision-making. The visualization will show how the decision tree splits on each feature, the resulting predictions for each branch, and the overall accuracy of the model. You can also experiment with different features and see how they affect the decision boundaries.</p>
+            </div>
+            <div class="flex justify-center">
+                <a href="/start" class="text-brandgreen-700 bg-white hover:bg-brandgreen-200 focus:ring-4 focus:outline-none focus:ring-brandgreen-300 text-lg font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center">
+                    Get started
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

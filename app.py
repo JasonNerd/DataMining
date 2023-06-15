@@ -6,6 +6,7 @@ from sklearn import tree
 from os import popen
 import graphviz
 import time
+import interactive_decision_tree as idt ## local module
 from tree_explainer import *
 
 UPLOAD_FOLDER = 'static/upload/'
@@ -45,6 +46,17 @@ def save_tree_to_png_file(clf, feature_names, class_name, filename):
     # transfer to .png file
     popen("dot -Tpng " + path_to_dot_file_without_ext + ".dot" + " -o " + path_to_dot_file_without_ext + ".png")
     return 'result/' + filename + ".png"
+
+def save_sankey_to_html_file(clf, features, target_names, filename):
+    static_path = "result/" + filename + ".sankey.html"
+    relative_path = "./static/result/" + filename + ".sankey.html"
+    
+    idt.create_sankey(clf, 
+                  features, 
+                  target_names, 
+                  save_path=relative_path)
+
+    return static_path
 
 @app.route('/')
 @app.route('/index')
@@ -94,14 +106,16 @@ def calc_result():
         
         X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0, train_size=0.7)
 
-        clf = tree.DecisionTreeClassifier(criterion="gini")# 实例化模型，添加criterion参数
+        clf = tree.DecisionTreeClassifier(criterion="gini", max_depth=2)# 实例化模型，添加criterion参数
         clf = clf.fit(X_train, y_train)
+        
+        target_names = ["0", "1"]
         
         accuracy = clf.score(X_test, y_test)
         
-        print(accuracy)
-        
         png_filename = save_tree_to_png_file(clf, feature_names, class_name, file.filename)
+        
+        sankey_filename = save_sankey_to_html_file(clf, X, ["0", "1"], file.filename)
         
         tree_explanation = explain_tree(clf)
 
@@ -110,7 +124,8 @@ def calc_result():
             tree_explanation=tree_explanation,
             class_name=class_name,
             accuracy=round(accuracy * 100, 2),
-            tree_png_filename=png_filename
+            tree_png_filename=png_filename,
+            sankey_html_filename=sankey_filename,
         )
     
     return redirect('/start')
